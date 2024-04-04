@@ -31,13 +31,14 @@ public class CharacterController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            //
             m_rigidBody.velocity = Vector3.zero;
             //Apply a force to this Rigidbody in direction of this GameObjects up axis
-            m_rigidBody.AddForce(new Vector2(0, 500010), ForceMode2D.Impulse);
+            m_rigidBody.AddForce(new Vector2(0, 210), ForceMode2D.Impulse);
         }
 
-        m_rigidBody.velocity = m_velocity;
-        m_rigidBody.rotation += -m_velocity.x * 40 * Time.deltaTime;
+        m_rigidBody.velocity = new Vector2(m_velocity.x, m_rigidBody.velocity.y);
+        //m_rigidBody.rotation += -m_velocity.x * 40 * Time.deltaTime;
         if (m_velocity.x != 0)
         {
             m_velocity.x = Mathf.Sign(m_velocity.x) * Mathf.Max(0,Mathf.Abs(m_velocity.x) - 10 * Time.deltaTime);
