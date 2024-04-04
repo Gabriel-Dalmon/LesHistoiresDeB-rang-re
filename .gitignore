@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Les ajouts de Baptiste la piste (de course)
+[Tt]emp/
+[Uu]serSettings/
+[Ll]ibrary/
