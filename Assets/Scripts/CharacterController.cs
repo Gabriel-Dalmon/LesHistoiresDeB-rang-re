@@ -7,12 +7,12 @@ public class CharacterController : MonoBehaviour
     public float maxHorizontalVelocity;
 
     Rigidbody2D m_rigidBody;
-    public Vector3 m_velocity;
+    public Vector2 m_velocity;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_velocity = new Vector3(0, 0, 0);
+        m_velocity = new Vector2(0, 0);
         m_rigidBody = GetComponent<Rigidbody2D>();
     }
 
@@ -29,11 +29,18 @@ public class CharacterController : MonoBehaviour
             m_velocity.x = Mathf.Max(-maxHorizontalVelocity, m_velocity.x + (-100) * Time.deltaTime);
         }
 
-        transform.position += m_velocity * Time.deltaTime;
-        if(m_velocity.x != 0)
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            m_rigidBody.velocity = Vector3.zero;
+            //Apply a force to this Rigidbody in direction of this GameObjects up axis
+            m_rigidBody.AddForce(new Vector2(0, 500010), ForceMode2D.Impulse);
+        }
+
+        m_rigidBody.velocity = m_velocity;
+        m_rigidBody.rotation += -m_velocity.x * 40 * Time.deltaTime;
+        if (m_velocity.x != 0)
         {
             m_velocity.x = Mathf.Sign(m_velocity.x) * Mathf.Max(0,Mathf.Abs(m_velocity.x) - 10 * Time.deltaTime);
         }
-        //m_velocity.x -= Mathf.Sign(m_velocity.x) 2;
     }
 }
