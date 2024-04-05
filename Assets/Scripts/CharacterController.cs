@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class CharacterController : MonoBehaviour
 {
-    public float maxHorizontalVelocity;
+    int _health = 5;
+    float _maxAngularVelocity;
+    float _velocityMultiplier = 3000;
+
+    public int Health { get { return _health; }, set { _health = Mathf.Max(value,0); } }
 
     Rigidbody2D m_rigidBody;
-    public Vector2 m_velocity;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_velocity = new Vector2(0, 0);
         m_rigidBody = GetComponent<Rigidbody2D>();
     }
 
@@ -21,27 +23,41 @@ public class CharacterController : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.D))
         {
-            m_velocity.x = Mathf.Min(maxHorizontalVelocity, m_velocity.x + 100 * Time.deltaTime);
+            m_rigidBody.angularVelocity = Mathf.Max(-_maxAngularVelocity, m_rigidBody.angularVelocity + (-_velocityMultiplier) * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            m_velocity.x = Mathf.Max(-maxHorizontalVelocity, m_velocity.x + (-100) * Time.deltaTime);
+            m_rigidBody.angularVelocity = Mathf.Min(_maxAngularVelocity, m_rigidBody.angularVelocity + (_velocityMultiplier) * Time.deltaTime);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //
-            m_rigidBody.velocity = Vector3.zero;
-            //Apply a force to this Rigidbody in direction of this GameObjects up axis
+            m_rigidBody.velocity = new Vector2(GetComponent<CircleCollider2D>().radius * -m_rigidBody.angularVelocity / 200, 0);
             m_rigidBody.AddForce(new Vector2(0, 210), ForceMode2D.Impulse);
         }
+    }
 
-        m_rigidBody.velocity = new Vector2(m_velocity.x, m_rigidBody.velocity.y);
-        //m_rigidBody.rotation += -m_velocity.x * 40 * Time.deltaTime;
-        if (m_velocity.x != 0)
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        other.gameObject.SetActive(false);
+        if(other.gameObject.CompareTag("plant"))
         {
-            m_velocity.x = Mathf.Sign(m_velocity.x) * Mathf.Max(0,Mathf.Abs(m_velocity.x) - 10 * Time.deltaTime);
+            Debug.Log("Snail: Eating Plant");
+            _velocityMultiplier *= 2;
+            _maxAngularVelocity *= 1.4f;
+        } else if(other.gameObject.CompareTag("Spike"))
+        {
+            Health--;
+        }
+    }
+
+    void TakeDamage(int healthPointsToRemove = 1)
+    {
+        Health--;
+        if (Health <= 0)
+        {
+            this.gameObject.SetActive(false);
         }
     }
 }
