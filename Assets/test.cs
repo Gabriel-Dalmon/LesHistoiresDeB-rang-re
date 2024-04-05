@@ -6,13 +6,13 @@ public class test : MonoBehaviour
 {
 
     public int powerJump = 5000;
-    public int movementSpeed;
+    public int movementSpeed = 3;
     public feet feet;
 
     // Start is called before the first frame update
     void Start()
     {
-        print("Hello world!!!!!!!!!!!!!!!!!!!!!!!");
+        print("Hello world!");
     }
 
     // Update is called once per frame
@@ -37,7 +37,7 @@ public class test : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 1) * powerJump);
         }
 
-        if (Input.GetKeyDown (KeyCode.E))
+        /*if (Input.GetKeyDown (KeyCode.E))
         {
             //Sprite sprite = "Circle";
             GameObject go = new GameObject("Ball");
@@ -46,7 +46,7 @@ public class test : MonoBehaviour
             SpriteRenderer spriteRenderer = new SpriteRenderer();
             //go.AddComponent<Rigidbody2D>();
             go.AddComponent<CircleCollider2D>();
-        }
+        }*/
         
     }
 }

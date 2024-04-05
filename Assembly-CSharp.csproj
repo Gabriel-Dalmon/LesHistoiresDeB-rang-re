@@ -63,6 +63,7 @@
     <Compile Include="Assets\CameraController.cs" />
     <Compile Include="Assets\feet.cs" />
     <Compile Include="Assets\test.cs" />
+    <Compile Include="Assets\SwitchSnail.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
