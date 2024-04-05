@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{D699AAD8-4E65-0766-732C-05F7D4E94DF9}</ProjectGuid>
+    <ProjectGuid>{56AC67D5-93FF-1E79-C928-B71E941D16ED}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -63,6 +63,7 @@
     <Compile Include="Assets\CameraController.cs" />
     <Compile Include="Assets\feet.cs" />
     <Compile Include="Assets\test.cs" />
+    <Compile Include="Assets\bulkRename.cs" />
     <Compile Include="Assets\SwitchSnail.cs" />
   </ItemGroup>
   <ItemGroup>
