@@ -5,7 +5,8 @@ using UnityEngine;
 public class test : MonoBehaviour
 {
 
-    public int powerJump = 500;
+    public int powerJump = 5000;
+    public int movementSpeed;
     public feet feet;
 
     // Start is called before the first frame update
@@ -17,15 +18,21 @@ public class test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        Vector2 currentVelocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
+
         if (Input.GetKey(KeyCode.D))
         {
-            GetComponent<Transform>().position += new Vector3(10 * Time.deltaTime, 0 * Time.deltaTime, 0 * Time.deltaTime);
+            currentVelocity.x += movementSpeed;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            GetComponent<Transform>().position -= new Vector3(10 * Time.deltaTime, 0 * Time.deltaTime, 0 * Time.deltaTime);
+            currentVelocity.x -= movementSpeed;
         }
-        if (Input.GetKey(KeyCode.Space) && feet.isGrounded == true)
+
+        GetComponent<Rigidbody2D>().velocity = currentVelocity;
+
+        if (Input.GetKeyDown(KeyCode.Space) && feet.isGrounded == true)
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 1) * powerJump);
         }
