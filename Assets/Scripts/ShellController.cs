@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class ShellController : MonoBehaviour
 {
-    int _health = 5;
-    float _maxAngularVelocity;
+    public int _health = 5;
+    float _maxAngularVelocity = 1000;
     float _velocityMultiplier = 3000;
-
-    public int Health { get { return _health; }, set { _health = Mathf.Max(value,0); } }
-
     Rigidbody2D m_rigidBody;
+    bool _isInvincible = false;
+    int _isInSpikeTrigger = 0;
+
+
+    public int Health 
+    { 
+        get { return _health; } 
+        set { _health = Mathf.Max(value, 0); } 
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -40,15 +46,24 @@ public class CharacterController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        other.gameObject.SetActive(false);
         if(other.gameObject.CompareTag("plant"))
         {
             Debug.Log("Snail: Eating Plant");
+            other.gameObject.SetActive(false);
             _velocityMultiplier *= 2;
             _maxAngularVelocity *= 1.4f;
         } else if(other.gameObject.CompareTag("Spike"))
         {
-            Health--;
+            _isInSpikeTrigger++;
+            TakeDamage();
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.gameObject.CompareTag("Spike"))
+        {
+            _isInSpikeTrigger--;
         }
     }
 
@@ -57,7 +72,22 @@ public class CharacterController : MonoBehaviour
         Health--;
         if (Health <= 0)
         {
+            Debug.Log("Snail: Dead");
             this.gameObject.SetActive(false);
+        } else
+        {
+            StartCoroutine(TemporaryInvincibility(5));
+        }
+    }
+
+    IEnumerator TemporaryInvincibility(float durationInSeconds)
+    {
+        _isInvincible = true;
+        yield return new WaitForSeconds(durationInSeconds);
+        _isInvincible = false;
+        if(_isInSpikeTrigger > 0)
+        {
+            TakeDamage();
         }
     }
 }
