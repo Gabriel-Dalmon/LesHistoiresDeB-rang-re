@@ -5,6 +5,8 @@ using UnityEngine;
 public class ShellController : MonoBehaviour
 {
     public int _health = 5;
+    public Transform shellExitTransform;
+    public bool isGrounded = false;
     float _maxAngularVelocity = 1000;
     float _velocityMultiplier = 3000;
     Rigidbody2D m_rigidBody;
@@ -16,6 +18,21 @@ public class ShellController : MonoBehaviour
     { 
         get { return _health; } 
         set { _health = Mathf.Max(value, 0); } 
+    }
+
+    public bool IsGrounded { 
+        get => isGrounded; 
+        set {
+            isGrounded = value;
+            if(isGrounded)
+            {
+                _velocityMultiplier = 3000;
+            }
+            else
+            {
+                _velocityMultiplier = 500;
+            }
+        } 
     }
 
     // Start is called before the first frame update
@@ -37,13 +54,14 @@ public class ShellController : MonoBehaviour
             m_rigidBody.angularVelocity = Mathf.Min(_maxAngularVelocity, m_rigidBody.angularVelocity + (_velocityMultiplier) * Time.deltaTime);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
         {
             m_rigidBody.velocity = new Vector2(GetComponent<CircleCollider2D>().radius * -m_rigidBody.angularVelocity / 200, 0);
             m_rigidBody.AddForce(new Vector2(0, 210), ForceMode2D.Impulse);
         }
-    }
 
+
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.gameObject.CompareTag("plant"))
@@ -76,6 +94,7 @@ public class ShellController : MonoBehaviour
             this.gameObject.SetActive(false);
         } else
         {
+            GetComponent<Animator>().SetTrigger("Hit");
             StartCoroutine(TemporaryInvincibility(5));
         }
     }
