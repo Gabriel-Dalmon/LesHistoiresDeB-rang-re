@@ -12,10 +12,15 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         playingClipIndex = Random.Range(0, clips.Length);
-        PlayAudio();
     }
 
     void PlayAudio()
+    {
+        source.clip = clips[playingClipIndex];
+        source.Play();
+    }
+
+    void PlayInfiniteAudio()
     {
         source.clip = clips[playingClipIndex];
         source.Play();

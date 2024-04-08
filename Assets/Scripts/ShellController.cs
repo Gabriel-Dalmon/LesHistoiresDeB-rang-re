@@ -6,7 +6,7 @@ public class ShellController : MonoBehaviour
 {
     public int _health = 5;
     public Transform shellExitTransform;
-    public bool isGrounded = false;
+    bool isGrounded = false;
     float _maxAngularVelocity = 1000;
     float _velocityMultiplier = 3000;
     Rigidbody2D m_rigidBody;
@@ -59,8 +59,6 @@ public class ShellController : MonoBehaviour
             m_rigidBody.velocity = new Vector2(GetComponent<CircleCollider2D>().radius * -m_rigidBody.angularVelocity / 200, 0);
             m_rigidBody.AddForce(new Vector2(0, 210), ForceMode2D.Impulse);
         }
-
-
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -73,7 +71,10 @@ public class ShellController : MonoBehaviour
         } else if(other.gameObject.CompareTag("Spike"))
         {
             _isInSpikeTrigger++;
-            TakeDamage();
+            if(!_isInvincible)
+            {
+                TakeDamage();
+            }
         }
     }
 
@@ -81,7 +82,7 @@ public class ShellController : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Spike"))
         {
-            _isInSpikeTrigger--;
+            _isInSpikeTrigger = Mathf.Max(0, _isInSpikeTrigger - 1);
         }
     }
 

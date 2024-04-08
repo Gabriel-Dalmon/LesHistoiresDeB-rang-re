@@ -19,7 +19,7 @@ public class MainMenuActions : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("Assets/Settings/Scenes/TestingScene.unity");
+        SceneManager.LoadScene("Assets/Scenes/TestingScene.unity");
     }
 
     public void QuitGame()
