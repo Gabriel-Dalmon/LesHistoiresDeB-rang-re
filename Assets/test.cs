@@ -32,7 +32,7 @@ public class test : MonoBehaviour
 
         GetComponent<Rigidbody2D>().velocity = currentVelocity;
 
-        if (Input.GetKeyDown(KeyCode.Space) && feet.isGrounded == true)
+        if (Input.GetKeyDown(KeyCode.Space) && feet.isGrounded)
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 1) * powerJump);
         }
