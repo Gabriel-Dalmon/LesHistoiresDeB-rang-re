@@ -27,10 +27,12 @@ public class ShellController : MonoBehaviour
             if(isGrounded)
             {
                 _velocityMultiplier = 3000;
+                m_rigidBody.gravityScale = 0;
             }
             else
             {
                 _velocityMultiplier = 500;
+                m_rigidBody.gravityScale = 1;
             }
         } 
     }
@@ -54,10 +56,27 @@ public class ShellController : MonoBehaviour
             m_rigidBody.angularVelocity = Mathf.Min(_maxAngularVelocity, m_rigidBody.angularVelocity + (_velocityMultiplier) * Time.deltaTime);
         }
 
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            m_rigidBody.angularDrag *= 16;
+        } else if (Input.GetKeyUp(KeyCode.S))
+        {
+            m_rigidBody.angularDrag *= 0.0625f;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
         {
             m_rigidBody.velocity = new Vector2(GetComponent<CircleCollider2D>().radius * -m_rigidBody.angularVelocity / 200, 0);
             m_rigidBody.AddForce(new Vector2(0, 210), ForceMode2D.Impulse);
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            m_rigidBody.gravityScale *= -1;
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            m_rigidBody.gravityScale = 1 - Mathf.Abs(m_rigidBody.gravityScale);
         }
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -83,6 +102,36 @@ public class ShellController : MonoBehaviour
         if(other.gameObject.CompareTag("Spike"))
         {
             _isInSpikeTrigger = Mathf.Max(0, _isInSpikeTrigger - 1);
+        }
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (isGrounded == false)
+        {
+            return;
+        }
+        ContactPoint2D[] contacts = new ContactPoint2D[collision.contactCount];
+        Debug.Log(collision.GetContacts(contacts));
+        Debug.Log(collision.contacts.Length);
+        for (int i = 0; i < contacts.Length; i++)
+        {
+            Debug.Log(contacts[i].point);
+        }
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (isGrounded == false) 
+        {
+            return;
+        }
+        Debug.Log(collision.contactCount);
+        ContactPoint2D[] contacts = new ContactPoint2D[collision.contactCount];
+        collision.GetContacts(contacts);
+        for(int i = 0; i < contacts.Length; i++)
+        {
+            Vector2 stickyForce = new Vector2(contacts[i].point.x - transform.position.x, contacts[i].point.y - transform.position.y).normalized * 10 * Time.deltaTime;
+            m_rigidBody.velocity += stickyForce;
         }
     }
 
