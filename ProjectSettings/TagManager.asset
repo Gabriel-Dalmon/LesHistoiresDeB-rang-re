@@ -9,6 +9,7 @@ TagManager:
   - Coquille
   - Bounce
   - Bump
+  - Death
   layers:
   - Default
   - TransparentFX
