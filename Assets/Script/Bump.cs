@@ -7,7 +7,8 @@ using UnityEngine;
 public class Bump : MonoBehaviour
 {
     public bool isBounced;
-    private Animator bounce;
+    public Rigidbody2D rb;
+    public float launchForce = 2.0f;
 
     private void Start()
     {
@@ -19,6 +20,7 @@ public class Bump : MonoBehaviour
         if (collision.gameObject.tag == "Bounce")
         {
             collision.transform.parent.GetComponent<Animator>().SetTrigger("Bounce");
+            rb.AddForce(Vector2.up * launchForce); 
         }
     }
 
