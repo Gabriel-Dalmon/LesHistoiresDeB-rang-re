@@ -46,7 +46,7 @@ public class Bump : MonoBehaviour
         {
                 //bounce.SetTrigger("")
             
-            
-        }
+
+        }        
     }
 }
