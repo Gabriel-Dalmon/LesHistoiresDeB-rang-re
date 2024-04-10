@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\CameraController.cs" />
     <Compile Include="Assets\SoftBody.cs" />
+    <Compile Include="Assets\SoftBodyCollider.cs" />
     <Compile Include="Assets\feet.cs" />
     <Compile Include="Assets\test.cs" />
     <Compile Include="Assets\bulkRename.cs" />
