@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class DeathSnail : MonoBehaviour
 {
-    public bool test = false;
+    public GameObject snail;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Death")
         {
-            test = true;
+            Destroy(snail);
         }
     }
 }
