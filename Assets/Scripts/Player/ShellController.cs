@@ -2,45 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShellController : MonoBehaviour
+public class ShellController : SnailController
 {
-    public int _health = 5;
     public Transform shellExitTransform;
-    bool isGrounded = false;
     float _maxAngularVelocity = 1000;
     float _velocityMultiplier = 3000;
-    Rigidbody2D m_rigidBody;
-    bool _isInvincible = false;
-    int _isInSpikeTrigger = 0;
 
-
-    public int Health 
-    { 
-        get { return _health; } 
-        set { _health = Mathf.Max(value, 0); } 
-    }
-
-    public bool IsGrounded { 
-        get => isGrounded; 
+    public new bool IsGrounded { 
+        get => _isGrounded; 
         set {
-            isGrounded = value;
-            if(isGrounded)
+            _isGrounded = value;
+            if(_isGrounded)
             {
                 _velocityMultiplier = 3000;
-                m_rigidBody.gravityScale = 0;
+                _rigidBody.gravityScale = 0;
             }
             else
             {
                 _velocityMultiplier = 500;
-                m_rigidBody.gravityScale = 1;
+                _rigidBody.gravityScale = 1;
             }
         } 
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        m_rigidBody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -48,40 +30,40 @@ public class ShellController : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.D))
         {
-            m_rigidBody.angularVelocity = Mathf.Max(-_maxAngularVelocity, m_rigidBody.angularVelocity + (-_velocityMultiplier) * Time.deltaTime);
+            _rigidBody.angularVelocity = Mathf.Max(-_maxAngularVelocity, _rigidBody.angularVelocity + (-_velocityMultiplier) * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            m_rigidBody.angularVelocity = Mathf.Min(_maxAngularVelocity, m_rigidBody.angularVelocity + (_velocityMultiplier) * Time.deltaTime);
+            _rigidBody.angularVelocity = Mathf.Min(_maxAngularVelocity, _rigidBody.angularVelocity + (_velocityMultiplier) * Time.deltaTime);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            m_rigidBody.angularDrag *= 16;
+            _rigidBody.angularDrag *= 16;
         } else if (Input.GetKeyUp(KeyCode.S))
         {
-            m_rigidBody.angularDrag *= 0.0625f;
+            _rigidBody.angularDrag *= 0.0625f;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && IsGrounded)
         {
-            m_rigidBody.velocity = new Vector2(GetComponent<CircleCollider2D>().radius * -m_rigidBody.angularVelocity / 200, 0);
-            m_rigidBody.AddForce(new Vector2(0, 210), ForceMode2D.Impulse);
+            _rigidBody.velocity = new Vector2(GetComponent<CircleCollider2D>().radius * -_rigidBody.angularVelocity / 200, 0);
+            _rigidBody.AddForce(new Vector2(0, 210), ForceMode2D.Impulse);
         }
 
         if (Input.GetKeyDown(KeyCode.G))
         {
-            m_rigidBody.gravityScale *= -1;
+            _rigidBody.gravityScale *= -1;
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
-            m_rigidBody.gravityScale = 1 - Mathf.Abs(m_rigidBody.gravityScale);
+            _rigidBody.gravityScale = 1 - Mathf.Abs(_rigidBody.gravityScale);
         }
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("plant"))
+        if(other.gameObject.CompareTag("Plant"))
         {
             Debug.Log("Snail: Eating Plant");
             other.gameObject.SetActive(false);
@@ -106,7 +88,7 @@ public class ShellController : MonoBehaviour
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isGrounded == false)
+        if (IsGrounded == false)
         {
             return;
         }
@@ -121,7 +103,7 @@ public class ShellController : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D collision)
     {
-        if (isGrounded == false) 
+        if (IsGrounded == false) 
         {
             return;
         }
@@ -131,7 +113,7 @@ public class ShellController : MonoBehaviour
         for(int i = 0; i < contacts.Length; i++)
         {
             Vector2 stickyForce = new Vector2(contacts[i].point.x - transform.position.x, contacts[i].point.y - transform.position.y).normalized * 10 * Time.deltaTime;
-            m_rigidBody.velocity += stickyForce;
+            _rigidBody.velocity += stickyForce;
         }
     }
 

@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - plant
   - Spike
   - Ground
+  - Plant
   layers:
   - Default
   - TransparentFX
