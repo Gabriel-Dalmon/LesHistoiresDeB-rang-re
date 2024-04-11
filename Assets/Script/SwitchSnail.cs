@@ -9,7 +9,7 @@ public class SwitchSnail : MonoBehaviour
     public GameObject Shell;
     public GameObject Snail;
 
-    
+    public GameObject camera;
         
     // Start is called before the first frame update
     void Start()
@@ -22,14 +22,21 @@ public class SwitchSnail : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
+            if (Shell.activeSelf)
+            {
+                camera.GetComponent<CameraController>().parentTransform = Snail.transform;
 
-            Shell.GetComponent<Transform>().position = Snail.GetComponent<Transform>().position;
-            Snail.GetComponent<Transform>().position = Shell.GetComponent<Transform>().position;
+                Snail.GetComponent<Transform>().position = Shell.GetComponent<Transform>().position;
+                Shell.SetActive(!Shell.activeSelf);
+                Snail.SetActive(!Snail.activeSelf);
+            } else if  (! Shell.activeSelf)
+            {
+                camera.GetComponent<CameraController>().parentTransform = Shell.transform;
 
-            Shell.SetActive(! Shell.activeSelf);
-            Snail.SetActive(! Snail.activeSelf);
-
-            
+                Shell.GetComponent<Transform>().position = Snail.GetComponent<Transform>().position;
+                Shell.SetActive(!Shell.activeSelf);
+                Snail.SetActive(!Snail.activeSelf);
+            }
         }
     }
 }
