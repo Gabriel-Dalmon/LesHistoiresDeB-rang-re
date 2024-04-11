@@ -61,23 +61,6 @@ public class ShellController : SnailController
             _rigidBody.gravityScale = 1 - Mathf.Abs(_rigidBody.gravityScale);
         }
     }
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if(other.gameObject.CompareTag("Plant"))
-        {
-            Debug.Log("Snail: Eating Plant");
-            other.gameObject.SetActive(false);
-            _velocityMultiplier *= 2;
-            _maxAngularVelocity *= 1.4f;
-        } else if(other.gameObject.CompareTag("Spike"))
-        {
-            _isInSpikeTrigger++;
-            if(!_isInvincible)
-            {
-                TakeDamage();
-            }
-        }
-    }
 
     void OnTriggerExit2D(Collider2D other)
     {
@@ -93,12 +76,6 @@ public class ShellController : SnailController
             return;
         }
         ContactPoint2D[] contacts = new ContactPoint2D[collision.contactCount];
-        Debug.Log(collision.GetContacts(contacts));
-        Debug.Log(collision.contacts.Length);
-        for (int i = 0; i < contacts.Length; i++)
-        {
-            Debug.Log(contacts[i].point);
-        }
     }
 
     void OnCollisionStay2D(Collision2D collision)
@@ -107,7 +84,6 @@ public class ShellController : SnailController
         {
             return;
         }
-        Debug.Log(collision.contactCount);
         ContactPoint2D[] contacts = new ContactPoint2D[collision.contactCount];
         collision.GetContacts(contacts);
         for(int i = 0; i < contacts.Length; i++)

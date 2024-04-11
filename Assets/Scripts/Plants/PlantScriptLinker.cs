@@ -11,13 +11,4 @@ public class PlantScriptLinker : MonoBehaviour
     {
         return _linkedPlantScript;
     }
-    /*public virtual void AddPlantEffect(SnailController snailController) 
-    { 
-        _linkedPlantScript.AddPlantEffect(snailController);
-    }
-
-    public virtual void RemovePlantEffect(SnailController snailController)
-    {
-        _linkedPlantScript.RemovePlantEffect(snailController);
-    }*/
 }

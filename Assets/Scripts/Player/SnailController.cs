@@ -11,7 +11,7 @@ public abstract class SnailController : MonoBehaviour
     protected Animator _animator;
     protected bool _isInvincible = false;
     protected int _isInSpikeTrigger = 0;
-    protected PlantScript _currentPlantScript = null;
+    protected PlantScript _currentPlantScript;
 
     public virtual int Health
     {
@@ -21,8 +21,8 @@ public abstract class SnailController : MonoBehaviour
 
     public virtual bool IsGrounded { get; set; }
 
-    public int SpeedMultiplier { get; set; }
-    public int MaxSpeedMultiplier { get; set; }
+    public int SpeedMultiplier { get { return _speedMultiplier; } set { _speedMultiplier = value; } }
+    public int MaxSpeedMultiplier { get { return _maxSpeedMultiplier; } set { _maxSpeedMultiplier = value; } }
 
     // Start is called before the first frame update
     void Start()
@@ -58,12 +58,16 @@ public abstract class SnailController : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other) // Called twice because of the colliders in child entities.
     {
-        
         if (other.gameObject.CompareTag("Plant"))
         {
-            _currentPlantScript.RemovePlantEffect(this);
-            _currentPlantScript = other.gameObject.GetComponent<PlantScriptLinker>().Get();
-            _currentPlantScript.AddPlantEffect(this); // Call plant script to add the plant effect to the player
+            if (other.gameObject.activeInHierarchy)
+            {
+                _currentPlantScript?.RemovePlantEffect(this); //This only prevents the case at start when _currentPlantScript is null,
+                                                              //should set a default effect less plant instead
+                _currentPlantScript = other.gameObject.GetComponent<PlantScriptLinker>().Get();
+                _currentPlantScript.AddPlantEffect(this); // Call plant script to add the plant effect to the player
+            }
+
         }
         else if (other.gameObject.CompareTag("Spike"))
         {
