@@ -6,7 +6,7 @@ public abstract class SnailController : MonoBehaviour
     public int _health = 5;
     public int _speedMultiplier = 1;
     public int _maxSpeedMultiplier = 1;
-    protected bool _isGrounded = false;
+    public bool _isGrounded = false;
     protected Rigidbody2D _rigidBody;
     protected Animator _animator;
     protected bool _isInvincible = false;
@@ -19,7 +19,7 @@ public abstract class SnailController : MonoBehaviour
         set { _health = Mathf.Max(value, 0); }
     }
 
-    public virtual bool IsGrounded { get; set; }
+    public virtual bool IsGrounded { get { return _isGrounded; } set { _isGrounded = value; } }
 
     public int SpeedMultiplier { get { return _speedMultiplier; } set { _speedMultiplier = value; } }
     public int MaxSpeedMultiplier { get { return _maxSpeedMultiplier; } set { _maxSpeedMultiplier = value; } }
