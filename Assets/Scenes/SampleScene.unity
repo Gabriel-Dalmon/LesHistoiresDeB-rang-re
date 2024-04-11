@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 228177429}
   - component: {fileID: 228177434}
   m_Layer: 6
-  m_Name: softcoll 11
+  m_Name: softcoll 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -393,7 +393,7 @@ Transform:
   m_GameObject: {fileID: 228177419}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.9429998, y: -1.378, z: -0.06}
+  m_LocalPosition: {x: -2.7, y: -1.499, z: -0.06}
   m_LocalScale: {x: 0.20799999, y: 0.20799999, z: 0.08}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -521,7 +521,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 228177419}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b82b1e0bb81d08d48b01727759e18053, type: 3}
   m_Name: 
@@ -570,7 +570,7 @@ GameObject:
   - component: {fileID: 245797922}
   - component: {fileID: 245797927}
   m_Layer: 6
-  m_Name: softcoll 3
+  m_Name: softcoll 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -699,7 +699,7 @@ Transform:
   m_GameObject: {fileID: 245797912}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.858, y: -1.3760002, z: -0.066}
+  m_LocalPosition: {x: -5.1, y: -1.5, z: -0.066}
   m_LocalScale: {x: 0.20799999, y: 0.20799999, z: 0.08}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -713,7 +713,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 245797912}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b82b1e0bb81d08d48b01727759e18053, type: 3}
   m_Name: 
@@ -1783,7 +1783,7 @@ GameObject:
   - component: {fileID: 347246402}
   - component: {fileID: 347246407}
   m_Layer: 6
-  m_Name: softcoll 5
+  m_Name: softcoll 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1912,7 +1912,7 @@ Transform:
   m_GameObject: {fileID: 347246392}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.608, y: -1.385, z: -0.064}
+  m_LocalPosition: {x: -4.5, y: -1.5, z: -0.064}
   m_LocalScale: {x: 0.20799999, y: 0.20799999, z: 0.08}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1926,7 +1926,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347246392}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b82b1e0bb81d08d48b01727759e18053, type: 3}
   m_Name: 
@@ -2066,7 +2066,7 @@ GameObject:
   - component: {fileID: 446938745}
   - component: {fileID: 446938750}
   m_Layer: 6
-  m_Name: softcoll 10
+  m_Name: softcoll 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2081,7 +2081,7 @@ Transform:
   m_GameObject: {fileID: 446938735}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.052, y: -1.3760002, z: -0.061}
+  m_LocalPosition: {x: -3, y: -1.5, z: -0.061}
   m_LocalScale: {x: 0.20799999, y: 0.20799999, z: 0.08}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2209,7 +2209,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 446938735}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b82b1e0bb81d08d48b01727759e18053, type: 3}
   m_Name: 
@@ -2383,8 +2383,8 @@ Transform:
   m_GameObject: {fileID: 485311323}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.091, y: -2.102, z: 0.057272233}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -4.3331, y: -2.102, z: 0.057272}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 996705410}
@@ -4014,7 +4014,7 @@ GameObject:
   - component: {fileID: 932039579}
   - component: {fileID: 932039584}
   m_Layer: 6
-  m_Name: softcoll 9
+  m_Name: softcoll 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4029,7 +4029,7 @@ Transform:
   m_GameObject: {fileID: 932039569}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.163, y: -1.3799999, z: -0.061}
+  m_LocalPosition: {x: -3.3, y: -1.5, z: -0.061}
   m_LocalScale: {x: 0.20799999, y: 0.20799999, z: 0.08}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -4157,7 +4157,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932039569}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b82b1e0bb81d08d48b01727759e18053, type: 3}
   m_Name: 
@@ -5061,7 +5061,7 @@ GameObject:
   - component: {fileID: 1207754013}
   - component: {fileID: 1207754018}
   m_Layer: 6
-  m_Name: softcoll 4
+  m_Name: softcoll 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5190,7 +5190,7 @@ Transform:
   m_GameObject: {fileID: 1207754003}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.734, y: -1.3760002, z: -0.065}
+  m_LocalPosition: {x: -4.8, y: -1.5, z: -0.065}
   m_LocalScale: {x: 0.20799999, y: 0.20799999, z: 0.08}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -5204,7 +5204,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1207754003}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b82b1e0bb81d08d48b01727759e18053, type: 3}
   m_Name: 
@@ -5570,7 +5570,7 @@ GameObject:
   - component: {fileID: 1224870904}
   - component: {fileID: 1224870909}
   m_Layer: 6
-  m_Name: softcoll 0
+  m_Name: softcoll 11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5699,7 +5699,7 @@ Transform:
   m_GameObject: {fileID: 1224870894}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.252, y: -1.382, z: -0.069}
+  m_LocalPosition: {x: -6, y: -1.5, z: -0.069}
   m_LocalScale: {x: 0.20799999, y: 0.20799999, z: 0.08}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -5713,7 +5713,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1224870894}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b82b1e0bb81d08d48b01727759e18053, type: 3}
   m_Name: 
@@ -6984,7 +6984,7 @@ GameObject:
   - component: {fileID: 1523031943}
   - component: {fileID: 1523031948}
   m_Layer: 6
-  m_Name: softcoll 6
+  m_Name: softcoll 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6999,7 +6999,7 @@ Transform:
   m_GameObject: {fileID: 1523031933}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.495, y: -1.382, z: -0.064}
+  m_LocalPosition: {x: -4.2, y: -1.5, z: -0.064}
   m_LocalScale: {x: 0.20799999, y: 0.20799999, z: 0.08}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -7127,7 +7127,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1523031933}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b82b1e0bb81d08d48b01727759e18053, type: 3}
   m_Name: 
@@ -7292,7 +7292,7 @@ Transform:
   m_GameObject: {fileID: 1552118371}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.71, y: -3.24, z: -10}
+  m_LocalPosition: {x: 2.75, y: -1.97, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7510,7 +7510,7 @@ GameObject:
   - component: {fileID: 1643531642}
   - component: {fileID: 1643531647}
   m_Layer: 6
-  m_Name: softcoll 7
+  m_Name: softcoll 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7525,7 +7525,7 @@ Transform:
   m_GameObject: {fileID: 1643531632}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.386, y: -1.385, z: -0.063}
+  m_LocalPosition: {x: -3.9, y: -1.5, z: -0.063}
   m_LocalScale: {x: 0.20799999, y: 0.20799999, z: 0.08}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -7653,7 +7653,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643531632}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b82b1e0bb81d08d48b01727759e18053, type: 3}
   m_Name: 
@@ -8427,7 +8427,7 @@ GameObject:
   - component: {fileID: 1748453320}
   - component: {fileID: 1748453325}
   m_Layer: 6
-  m_Name: softcoll 1
+  m_Name: softcoll 10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8556,7 +8556,7 @@ Transform:
   m_GameObject: {fileID: 1748453310}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.111, y: -1.379, z: -0.068}
+  m_LocalPosition: {x: -5.7, y: -1.5, z: -0.068}
   m_LocalScale: {x: 0.20799999, y: 0.20799999, z: 0.08}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -8570,7 +8570,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1748453310}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b82b1e0bb81d08d48b01727759e18053, type: 3}
   m_Name: 
@@ -8619,7 +8619,7 @@ GameObject:
   - component: {fileID: 1753009872}
   - component: {fileID: 1753009877}
   m_Layer: 6
-  m_Name: softcoll 2
+  m_Name: softcoll 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8748,7 +8748,7 @@ Transform:
   m_GameObject: {fileID: 1753009862}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.978, y: -1.378, z: -0.067}
+  m_LocalPosition: {x: -5.4, y: -1.5, z: -0.067}
   m_LocalScale: {x: 0.20799999, y: 0.20799999, z: 0.08}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -8762,7 +8762,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1753009862}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b82b1e0bb81d08d48b01727759e18053, type: 3}
   m_Name: 
@@ -9166,7 +9166,7 @@ GameObject:
   - component: {fileID: 1876518822}
   - component: {fileID: 1876518827}
   m_Layer: 6
-  m_Name: softcoll 8
+  m_Name: softcoll 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9181,7 +9181,7 @@ Transform:
   m_GameObject: {fileID: 1876518812}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.273, y: -1.385, z: -0.062}
+  m_LocalPosition: {x: -3.6, y: -1.5, z: -0.062}
   m_LocalScale: {x: 0.20799999, y: 0.20799999, z: 0.08}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -9309,7 +9309,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1876518812}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b82b1e0bb81d08d48b01727759e18053, type: 3}
   m_Name: 

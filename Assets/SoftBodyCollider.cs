@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SoftBodyCollider : MonoBehaviour
@@ -28,43 +29,54 @@ public class SoftBodyCollider : MonoBehaviour
     // Adds a Distance Joint to the SoftBodyCollider
     public void AddDistJoint(Transform ARGneighbor)
     {
-        // Builds the Distance Joint
-        DistanceJoint2D distJoint = new DistanceJoint2D();
+        // Adds a new joint first
+        this.gameObject.AddComponent<DistanceJoint2D>();
 
-        distJoint.enableCollision = false;
-        distJoint.autoConfigureConnectedAnchor = false;
-        distJoint.autoConfigureDistance = true;
-        distJoint.maxDistanceOnly = true;
+        // Gets the reference to that one unique new Distance Joint 2D
+        DistanceJoint2D newDistJoint = this.gameObject.GetComponents<DistanceJoint2D>().Last();
 
-        distJoint.breakAction = JointBreakAction2D.Destroy;
-        distJoint.breakForce = float.PositiveInfinity;
+        // Calibrates the new joint we added two lines ago
+        newDistJoint.enableCollision = false;
+        newDistJoint.autoConfigureConnectedAnchor = false;
+        newDistJoint.autoConfigureDistance = false;
+        newDistJoint.maxDistanceOnly = true;
 
-        distJoint.anchor = new Vector2(0, 0);
-        distJoint.connectedAnchor = new Vector2(0, 0);
+        newDistJoint.distance = .5f;
 
-        distJoint.connectedBody = ARGneighbor.gameObject.GetComponent<Rigidbody2D>();
+        newDistJoint.breakAction = JointBreakAction2D.Destroy;
+        newDistJoint.breakForce = float.PositiveInfinity;
 
-        // Adds (Apply) the Joint to the SoftBodyCollider
-        this.gameObject.AddComponent<DistanceJoint2D>(distJoint);
+        newDistJoint.anchor = new Vector2(0, 0);
+        newDistJoint.connectedAnchor = new Vector2(0, 0);
+
+        newDistJoint.connectedBody = ARGneighbor.gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Adds a Spring Joint to the SoftBodyCollider
-    public void AddSpringJoint(Transform ARGneighbor)
+    public void AddSpringJoint(Transform ARGneighbor, int ARGselfIndex, int ARGneighborIndex, int ARGfamilySize)
     {
-        // Builds the Spring Joint
+        // Adds a new joint first
         this.gameObject.AddComponent<SpringJoint2D>();
 
-        this.gameObject.GetComponent<SpringJoint2D>().enableCollision = false;
-        this.gameObject.GetComponent<SpringJoint2D>().autoConfigureConnectedAnchor = false;
-        this.gameObject.GetComponent<SpringJoint2D>().autoConfigureDistance = true;
+        // Gets the reference to that one unique new Distance Joint 2D
+        SpringJoint2D newSpringJoint = this.gameObject.GetComponents<SpringJoint2D>().Last();
 
-        this.gameObject.GetComponent<SpringJoint2D>().breakAction = JointBreakAction2D.Destroy;
-        this.gameObject.GetComponent<SpringJoint2D>().breakForce = float.PositiveInfinity;
+        // Calibrates the new joint we added two lines ago
+        newSpringJoint.enableCollision = false;
+        newSpringJoint.autoConfigureConnectedAnchor = false;
+        newSpringJoint.autoConfigureDistance = false;
+        newSpringJoint.distance = .2f;
 
-        this.gameObject.GetComponent<SpringJoint2D>().anchor = new Vector2(0, 0);
-        this.gameObject.GetComponent<SpringJoint2D>().connectedAnchor = new Vector2(0, 0);
+        newSpringJoint.breakAction = JointBreakAction2D.Destroy;
+        newSpringJoint.breakForce = float.PositiveInfinity;
 
-        this.gameObject.GetComponent<SpringJoint2D>().connectedBody = ARGneighbor.gameObject.GetComponent<Rigidbody2D>();
+        newSpringJoint.anchor = new Vector2(0, 0);
+        newSpringJoint.connectedAnchor = new Vector2(0, 0);
+
+        newSpringJoint.dampingRatio = 0;
+        newSpringJoint.frequency = (ARGfamilySize - Math.Abs(ARGselfIndex - ARGneighborIndex));
+
+        newSpringJoint.connectedBody = ARGneighbor.gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Adds a Hinge Joint to the SoftBodyCollider

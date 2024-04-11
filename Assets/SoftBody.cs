@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,37 +66,91 @@ public class SoftBody : MonoBehaviour
          */
 
         // Loads every part of the hitbox in the list
+        int childIndex = 0;
+        int siblingIndex = 0;
         foreach (Transform child in this.transform)
         {
-            print("working on child " + child.gameObject.name + "...");
             foreach (Transform sibling in this.transform)
             {
                 if (child.gameObject == sibling.gameObject)
                 {
-                    //print("link between " + child.gameObject.name + " and " +  sibling.gameObject.name + " SKIPPED !");
+                    ++siblingIndex;
                     continue;
                 }
 
-                //print("linking " + child.gameObject.name + " and " + sibling.gameObject.name);
                 //child.gameObject.GetComponent<SoftBodyCollider>().AddDistJoint(sibling);
+                //print("Testing child: " + child.gameObject.name + " and sibling: " + sibling.gameObject.name);
+                if( Math.Abs(childIndex - siblingIndex) == 1 )
+                {
+                    //print("PASSED (" + childIndex + ") and (" + siblingIndex + ")");
+                    child.gameObject.GetComponent<SoftBodyCollider>().AddSpringJoint(sibling, childIndex, siblingIndex, this.transform.childCount);
+                }
+                ++siblingIndex;
+            }
+            ++childIndex;
+            siblingIndex = 0;
+        }
 
+        //Debug.Break();
+    }
 
-                // Builds the Distance Joint
-                child.gameObject.AddComponent<DistanceJoint2D>();
+    private void Update()
+    {
+        // Checks every part of the soft body to ensure no one is too close to another
+        for (int i = 0;  i < this.transform.childCount;  ++i)
+        {
+            // Setup useful variable that will used through tests and adaptations
+            var curChild = this.transform.GetChild(i);
+            float minDist = .2f;
+            Vector2 minVec = new Vector2((float)Math.Sqrt(minDist), (float)Math.Sqrt(minDist));
+            Vector2 distVec = new Vector2(0, 0);
 
-                child.gameObject.GetComponent<DistanceJoint2D>().enableCollision = false;
-                child.gameObject.GetComponent<DistanceJoint2D>().autoConfigureConnectedAnchor = false;
-                child.gameObject.GetComponent<DistanceJoint2D>().autoConfigureDistance = true;
-                child.gameObject.GetComponent<DistanceJoint2D>().maxDistanceOnly = true;
+            // Performs the check for the part after (if there's any)
+            if ((i + 1) < this.transform.childCount)
+            {
+                // Determines the vector between both parts
+                distVec = this.transform.GetChild(i + 1).transform.position - curChild.transform.position;
+                if (distVec.magnitude < minDist)
+                {
+                    print("(" + (i + 1) + ") is too close to (" + i + ")");
+                    Debug.Break();
+                    // We know a part is too close, so let's move it away !
+                    // First, we normalize our vector that separates the two
+                    Vector2 normalizedDistVec = new Vector2(distVec.x, distVec.y);
+                    normalizedDistVec.Normalize();
 
-                child.gameObject.GetComponent<DistanceJoint2D>().breakAction = JointBreakAction2D.Destroy;
-                child.gameObject.GetComponent<DistanceJoint2D>().breakForce = float.PositiveInfinity;
+                    // Then, we multiply our now normalized vector with out wanted distance
+                    normalizedDistVec.x *= minDist;
+                    normalizedDistVec.y *= minDist;
 
-                child.gameObject.GetComponent<DistanceJoint2D>().anchor = new Vector2(0, 0);
-                child.gameObject.GetComponent<DistanceJoint2D>().connectedAnchor = new Vector2(0, 0);
+                    // Finally, let's apply that to that pesky, way-too-close other part
+                    // To make sure it's good, we teleport it to our current part, and then translate it
+                    this.transform.GetChild(i+1).transform.position = normalizedDistVec;
+                    this.transform.GetChild(i + 1).transform.Translate(normalizedDistVec);
+                }
+            }
 
-                child.gameObject.GetComponent<DistanceJoint2D>().connectedBody = new Rigidbody2D();
-                child.gameObject.GetComponent<DistanceJoint2D>().connectedBody = sibling.gameObject.GetComponent<Rigidbody2D>();
+            // Performs the check for the part before (if there's any)
+            if ((i - 1) >= 0)
+            {
+                // Determines the vector between both parts
+                distVec = this.transform.GetChild(i - 1).transform.position - curChild.transform.position;
+                if (distVec.magnitude < minDist)
+                {
+                    // We know a part is too close, so let's move it away !
+                    // First, we normalize our vector that separates the two
+                    Vector2 normalizedDistVec = new Vector2(distVec.x, distVec.y);
+                    normalizedDistVec.Normalize();
+
+                    // Then, we multiply our now normalized vector with out wanted distance
+                    normalizedDistVec.x *= minDist;
+                    normalizedDistVec.y *= minDist;
+
+                    // Finally, let's apply that to that pesky, way-too-close other part
+                    // To make sure it's good, we teleport it to our current part, and then translate it
+                    this.transform.GetChild(i - 1).transform.position = normalizedDistVec;
+                    this.transform.GetChild(i - 1).transform.Translate(normalizedDistVec);
+                }
             }
         }
     }
