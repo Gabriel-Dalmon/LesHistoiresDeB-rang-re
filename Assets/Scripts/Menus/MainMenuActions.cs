@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuActions : MonoBehaviour
 {
@@ -21,6 +22,13 @@ public class MainMenuActions : MonoBehaviour
     {
         SceneManager.LoadScene("Assets/Scenes/TestingScene.unity");
     }
+
+    public void OnHover(Image button, Sprite sprite)
+    {
+        button.sprite = sprite;
+    }
+
+
 
     public void QuitGame()
     {

@@ -39,7 +39,7 @@ public class ShellExitImpulse : MonoBehaviour
             _audioSources[1].Play();
             _particleSystem.Play();
             float angle = Mathf.Deg2Rad * transform.eulerAngles.z;
-            Vector2 force = new Vector2((float)Mathf.Cos(angle), (float)Mathf.Sin(angle)).normalized * 400;
+            Vector2 force = new Vector2((float)Mathf.Cos(angle), (float)Mathf.Sin(angle)).normalized * 250;
             //_rigidBody.AddForceAtPosition(force, transform.position, ForceMode2D.Impulse);
             _rigidBody.velocity = _rigidBody.velocity * 0.2f;//Vector2.zero;
             _rigidBody.AddForce(force, ForceMode2D.Impulse);
