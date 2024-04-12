@@ -113,20 +113,26 @@ public class SoftBody : MonoBehaviour
                 if (distVec.magnitude < minDist)
                 {
                     print("(" + (i + 1) + ") is too close to (" + i + ")");
-                    Debug.Break();
+                    //Debug.Break();
                     // We know a part is too close, so let's move it away !
                     // First, we normalize our vector that separates the two
+                    print("(" + i + ").pos : " + curChild.gameObject.transform.position + " || (" + (i+1) + ").pos : " + this.transform.GetChild(i+1).transform.position);
+                    print("distVec : " + distVec);
                     Vector2 normalizedDistVec = new Vector2(distVec.x, distVec.y);
                     normalizedDistVec.Normalize();
+                    print("normalizedDistVec : " + normalizedDistVec + "[" + normalizedDistVec.magnitude + "]");
 
                     // Then, we multiply our now normalized vector with out wanted distance
                     normalizedDistVec.x *= minDist;
                     normalizedDistVec.y *= minDist;
+                    print("normalizedDIstVec after + : " + normalizedDistVec + "[" + normalizedDistVec.magnitude + "]");
 
                     // Finally, let's apply that to that pesky, way-too-close other part
                     // To make sure it's good, we teleport it to our current part, and then translate it
-                    this.transform.GetChild(i+1).transform.position = normalizedDistVec;
-                    this.transform.GetChild(i + 1).transform.Translate(normalizedDistVec);
+                    this.transform.GetChild(i+1).transform.position = curChild.transform.position;
+                    print("(" + (i + 1) + ").pos (tp) -> " + this.transform.GetChild(i + 1).transform.position);
+                    this.transform.GetChild(i + 1).transform.Translate(normalizedDistVec, Space.World);
+                    print("(" + (i + 1) + ").pos (tr) -> " + this.transform.GetChild(i + 1).transform.position);
                 }
             }
 
@@ -148,8 +154,8 @@ public class SoftBody : MonoBehaviour
 
                     // Finally, let's apply that to that pesky, way-too-close other part
                     // To make sure it's good, we teleport it to our current part, and then translate it
-                    this.transform.GetChild(i - 1).transform.position = normalizedDistVec;
-                    this.transform.GetChild(i - 1).transform.Translate(normalizedDistVec);
+                    this.transform.GetChild(i - 1).transform.position = curChild.transform.position;
+                    this.transform.GetChild(i - 1).transform.Translate(normalizedDistVec, Space.World);
                 }
             }
         }
