@@ -20,7 +20,7 @@ public class MainMenuActions : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("Assets/Scenes/TestingScene.unity");
+        SceneManager.LoadScene("Assets/Scenes/Map.unity");
     }
 
     public void OnHover(Image button, Sprite sprite)
