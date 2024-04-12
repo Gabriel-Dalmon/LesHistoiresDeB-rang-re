@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -12,26 +13,19 @@ public class SoftBody : MonoBehaviour
 
     /* /' =========== '
        | ~~~{ Fields } */
-    /*   !!!! !!!!
-     *     abandonned code since passing ANYTHING to the list while the list is of ANY TYPE ends in a "null object being passed to the list boohooo"
-     *     fuckien bullshit.
-     *   !!!! !!!!
-     * private List<Transform> Lchildren;
-     */
+    private bool _isFacingLeft = true;
 
 
     /* /' =============== '
        | ~~~{ Properties } */
+    public bool FacingLeft{
+        get { return _isFacingLeft; }
+        set { _isFacingLeft = value;  OnDirectionSwitch?.Invoke(); }}
 
-    /*   !!!! !!!!
-     *     abandonned code since passing ANYTHING to the list while the list is of ANY TYPE ends in a "null object being passed to the list boohooo"
-     *     fuckien bullshit.
-     *   !!!! !!!!
-     * public List<SoftBodyCollider> _LSoftBodyColldier { get; }
-     */
 
     /* /' =========== '
        | ~~~{ Events } */
+    private event Action OnDirectionSwitch;
 
 
     /* /' ============ '
@@ -42,34 +36,40 @@ public class SoftBody : MonoBehaviour
        | ~~~{ UNITY DEFAULTS } */
     void Start()
     {
-        /*   !!!! !!!!
-         *     abandonned code since passing ANYTHING to the list while the list is of ANY TYPE ends in a "null object being passed to the list boohooo"
-         *     fuckien bullshit.
-         *   !!!! !!!!
-         * // Fills the list of childrens
-         * foreach (Transform child in this.transform)
-         * {
-         *    //var comps = child.gameObject.GetComponents(typeof(Component));
-         *    //int i = 0;
-         *    //foreach (var comp in comps)
-         *    //{
-         *    //    print("Component number " + ++i + " : " + comp.GetType());
-         *    //    if(comp.GetType() == typeof(SoftBodyCollider))
-         *    //    {
-         *    //        print("Pre Attempt " + ++i + " : " + comp.GetType());
-         *    //        _LSoftBodyColldier.Append(comp as SoftBodyCollider);
-         *    //    }
-         *    //}
-         *    print("Child data[Type: " + child.GetType() + ", UnityNull: " + child.IsUnityNull() + ", C#Null: " + child == null + "]");
-         *    Lchildren.Add(child);
-         * }
-         */
+        // Subscribes a lambda expression to OnDirectionSwitch
+        OnDirectionSwitch += () =>
+        {
+            if (!_isFacingLeft)
+            {
+                print("Changing to face right");
+                // Removes the first-in-chain part's ability to move
+                Destroy(this.transform.GetChild(0).GetComponent<feet>());
+                Destroy(this.transform.GetChild(0).GetComponent<test>());
 
-        // Loads every part of the hitbox in the list
+                // Grants the last-in-line part the ability to move
+                this.transform.GetChild(this.transform.childCount - 1).AddComponent<feet>();
+                this.transform.GetChild(this.transform.childCount - 1).AddComponent<test>();
+            }
+            else
+            {
+                print("Changing to face left");
+                // Removes the last-in-chain part's ability to move
+                Destroy(this.transform.GetChild(this.transform.childCount - 1).GetComponent<feet>());
+                Destroy(this.transform.GetChild(this.transform.childCount - 1).GetComponent<test>());
+
+                // Grants the first-in-line part the ability to move
+                this.transform.GetChild(0).AddComponent<feet>();
+                this.transform.GetChild(0).AddComponent<test>();
+            }
+            //Debug.Break();
+        };
+
+        // Goes through all parts of the soft body to initialize stuff
         int childIndex = 0;
         int siblingIndex = 0;
         foreach (Transform child in this.transform)
         {
+            // Loads every part of the hitbox in the list
             foreach (Transform sibling in this.transform)
             {
                 if (child.gameObject == sibling.gameObject)
@@ -112,27 +112,27 @@ public class SoftBody : MonoBehaviour
                 distVec = this.transform.GetChild(i + 1).transform.position - curChild.transform.position;
                 if (distVec.magnitude < minDist)
                 {
-                    print("(" + (i + 1) + ") is too close to (" + i + ")");
+                       //   print("(" + (i + 1) + ") is too close to (" + i + ")");
                     //Debug.Break();
                     // We know a part is too close, so let's move it away !
                     // First, we normalize our vector that separates the two
-                    print("(" + i + ").pos : " + curChild.gameObject.transform.position + " || (" + (i+1) + ").pos : " + this.transform.GetChild(i+1).transform.position);
-                    print("distVec : " + distVec);
+                       //   print("(" + i + ").pos : " + curChild.gameObject.transform.position + " || (" + (i+1) + ").pos : " + this.transform.GetChild(i+1).transform.position);
+                       //   print("distVec : " + distVec);
                     Vector2 normalizedDistVec = new Vector2(distVec.x, distVec.y);
                     normalizedDistVec.Normalize();
-                    print("normalizedDistVec : " + normalizedDistVec + "[" + normalizedDistVec.magnitude + "]");
+                       //   print("normalizedDistVec : " + normalizedDistVec + "[" + normalizedDistVec.magnitude + "]");
 
                     // Then, we multiply our now normalized vector with out wanted distance
                     normalizedDistVec.x *= minDist;
                     normalizedDistVec.y *= minDist;
-                    print("normalizedDIstVec after + : " + normalizedDistVec + "[" + normalizedDistVec.magnitude + "]");
+                       //   print("normalizedDIstVec after + : " + normalizedDistVec + "[" + normalizedDistVec.magnitude + "]");
 
                     // Finally, let's apply that to that pesky, way-too-close other part
                     // To make sure it's good, we teleport it to our current part, and then translate it
                     this.transform.GetChild(i+1).transform.position = curChild.transform.position;
-                    print("(" + (i + 1) + ").pos (tp) -> " + this.transform.GetChild(i + 1).transform.position);
+                       //   print("(" + (i + 1) + ").pos (tp) -> " + this.transform.GetChild(i + 1).transform.position);
                     this.transform.GetChild(i + 1).transform.Translate(normalizedDistVec, Space.World);
-                    print("(" + (i + 1) + ").pos (tr) -> " + this.transform.GetChild(i + 1).transform.position);
+                       //   print("(" + (i + 1) + ").pos (tr) -> " + this.transform.GetChild(i + 1).transform.position);
                 }
             }
 

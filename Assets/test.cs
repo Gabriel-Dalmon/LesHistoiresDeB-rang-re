@@ -23,11 +23,20 @@ public class test : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D))
         {
-            currentVelocity.x += movementSpeed;
+            // !!! THIS CODE WORK ASSUMING THAT THE MOVING OBJECT ALWAYS HAS A PARENT THAT'S A SOFT BODY CONTAINER !!!
+            // Changes the direction we are facing to Right if we were facing Left
+            // !!!
+            if (this.gameObject.GetComponentInParent<SoftBody>().FacingLeft == true)
+                this.gameObject.GetComponentInParent<SoftBody>().FacingLeft = false;
+            else
+                currentVelocity.x += movementSpeed;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            currentVelocity.x -= movementSpeed;
+            if (this.gameObject.GetComponentInParent<SoftBody>().FacingLeft == false)
+                this.gameObject.GetComponentInParent<SoftBody>().FacingLeft = true;
+            else
+                currentVelocity.x -= movementSpeed;
         }
 
         GetComponent<Rigidbody2D>().velocity = currentVelocity;
