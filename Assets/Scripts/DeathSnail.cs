@@ -11,7 +11,7 @@ public class DeathSnail : MonoBehaviour
     {
         if (collision.gameObject.tag == "Death")
         {
-            Destroy(snail);
+            snail.GetComponent<Transform>().position = new Vector3(-3, -3, 0);
         }
     }
 }
