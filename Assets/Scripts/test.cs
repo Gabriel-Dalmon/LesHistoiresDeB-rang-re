@@ -29,14 +29,14 @@ public class test : MonoBehaviour
             //gameObject.GetComponent<Transform>().localRotation = Quaternion.Euler(gameObject.GetComponent<Transform>().rotation.x, 180, gameObject.GetComponent<Transform>().rotation.z);
             currentVelocity.x += movementSpeed;
             oldScale.x = Mathf.Abs(oldScale.x);
-            GetComponent<Rigidbody2D>().centerOfMass = new Vector2(-1, 0);
+            GetComponent<Rigidbody2D>().centerOfMass = new Vector2(-0.7f, 0);
         }
         if (Input.GetKey(KeyCode.A))
         {
             //gameObject.GetComponent<Transform>().localRotation = Quaternion.Euler(gameObject.GetComponent<Transform>().rotation.x, 0, gameObject.GetComponent<Transform>().rotation.z);
             currentVelocity.x -= movementSpeed;
             oldScale.x = Mathf.Abs(oldScale.x) * -1;
-            GetComponent<Rigidbody2D>().centerOfMass = new Vector2(1,0);
+            GetComponent<Rigidbody2D>().centerOfMass = new Vector2(0.7f,0);
         }
 
         transform.localScale = oldScale;
