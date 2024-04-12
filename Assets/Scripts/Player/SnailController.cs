@@ -12,6 +12,8 @@ public abstract class SnailController : MonoBehaviour
     protected bool _isInvincible = false;
     protected int _isInSpikeTrigger = 0;
     protected PlantScript _currentPlantScript;
+    public int stickyStrength = 3;
+    public int remainingSpitCount = 0;
 
     public virtual int Health
     {

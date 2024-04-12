@@ -45,7 +45,10 @@ public class PauseMenu : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("Quitting game...");
-        Application.Quit();
+        /*Debug.Log("Quitting game...");
+        Application.Quit();*/
+        SceneManager.LoadScene("Map");
+        Time.timeScale = 1f;
+        GameIsPaused = false;
     }
 }

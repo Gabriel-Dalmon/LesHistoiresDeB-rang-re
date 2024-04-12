@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class ShellController : SnailController
 {
-    public Transform shellExitTransform;
     float _maxAngularVelocity = 1000;
-    float _velocityMultiplier = 3000;
+    float _velocityMultiplier = 4000;
 
     public new bool IsGrounded { 
         get => _isGrounded; 
@@ -14,7 +13,7 @@ public class ShellController : SnailController
             _isGrounded = value;
             if(_isGrounded)
             {
-                _velocityMultiplier = 3000;
+                _velocityMultiplier = 4000;
                 _rigidBody.gravityScale = 0;
             }
             else
@@ -30,12 +29,12 @@ public class ShellController : SnailController
     {
         if(Input.GetKey(KeyCode.D))
         {
-            _rigidBody.angularVelocity = Mathf.Max(-_maxAngularVelocity, _rigidBody.angularVelocity + (-_velocityMultiplier) * Time.deltaTime);
+            _rigidBody.angularVelocity = Mathf.Max(-_maxAngularVelocity * MaxSpeedMultiplier, _rigidBody.angularVelocity + (-_velocityMultiplier*SpeedMultiplier) * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            _rigidBody.angularVelocity = Mathf.Min(_maxAngularVelocity, _rigidBody.angularVelocity + (_velocityMultiplier) * Time.deltaTime);
+            _rigidBody.angularVelocity = Mathf.Min(_maxAngularVelocity * MaxSpeedMultiplier, _rigidBody.angularVelocity + (_velocityMultiplier* SpeedMultiplier) * Time.deltaTime);
         }
 
         if (Input.GetKeyDown(KeyCode.S))
@@ -88,7 +87,7 @@ public class ShellController : SnailController
         collision.GetContacts(contacts);
         for(int i = 0; i < contacts.Length; i++)
         {
-            Vector2 stickyForce = new Vector2(contacts[i].point.x - transform.position.x, contacts[i].point.y - transform.position.y).normalized * 10 * Time.deltaTime;
+            Vector2 stickyForce = new Vector2(contacts[i].point.x - transform.position.x, contacts[i].point.y - transform.position.y).normalized * stickyStrength * Time.deltaTime;
             _rigidBody.velocity += stickyForce;
         }
     }
